@@ -4,7 +4,9 @@ var mush = 0;
 var pep = 0;
 
 
-
+function creatPiz(){
+    cart.push(new pizza(mush, pep));
+}
 
 
 
@@ -38,11 +40,20 @@ $(".btn").click(function() {
 
 
 $("#checkout").click(function(){
+    var total = 0;
     for(order of cart){
-        $("#recipt").append(`<p class='recipt'>${order.pepperoni}</p>`)
-        $("#recipt").append(`<p class='recipt'>${order.mushrooms}</p>`)
-        
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.pepperoni}xPepperoni
+      </li>`)
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.mushrooms}xMushrooms
+        </li>`)
+        total += order.calcCost();
     }
+
+    $("#receipt").append(`<li class="list-group-item">
+    Total: $ ${total}
+    </li>`);
 })
 
 
@@ -61,6 +72,7 @@ class pizza{
     }
 
     calcCost(){
-        return 7 + (this.toppings.pepperoni*0.7) + (this.toppings.mushrooms * 0.5);
+        let temp =  7 + (this.pepperoni*0.7) + (this.mushrooms * 0.5);
+        return temp;
     }
 }
