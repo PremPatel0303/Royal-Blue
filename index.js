@@ -5,31 +5,54 @@ var pep = 0;
 
 
 
+var toppings2 = {
+    mushrooms: 0,
+    pepperoni: 0,
+    bacon: 0,
+    olives: 0
+}
+function creatPiz(){
+    cart.push(new pizza(toppings2));
+}
 
 
 
 $("#create-pizza").click(function() {
-    cart.push(new pizza(mush, pep));
+    cart.push(new pizza(toppings2));
     reset();
     
 })
 
 reset = () => {
-    mush = 0;
-    pep = 0;
+   toppings2 = {
+       mushrooms: 0,
+       pepperoni: 0,
+       bacon: 0,
+       olives: 0
+   }
 }
 
 $(".btn").click(function() {
 
     if(this.textContent == "Mushrooms"){
-        mush++;
-        console.log(mush)
+        toppings2.mushrooms++;
+        console.log(toppings2.mushrooms)
         $("#mushroom").css("opacity", 1)
     }
     else if(this.textContent == "Pepperoni"){
-        pep++;
-        console.log(pep)
+        toppings2.pepperoni++;
+        console.log(toppings2.pepperoni)
         $("#pepperoni").css("opacity", 1)
+    }
+    else if(this.textContent == "Bacon"){
+        toppings2.bacon++;
+        console.log(toppings2.bacon)
+        $("#Bacon").css("opacity", 1)
+    }
+    else if(this.textContent == "Olives"){
+        toppings2.olives++;
+        console.log(toppings2.olives)
+        $("#Olives").css("opacity", 1)
     }
 
 
@@ -38,29 +61,46 @@ $(".btn").click(function() {
 
 
 $("#checkout").click(function(){
+    var total = 0;
     for(order of cart){
-        $("#recipt").append(`<p class='recipt'>${order.pepperoni}</p>`)
-        $("#recipt").append(`<p class='recipt'>${order.mushrooms}</p>`)
-        
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.toppings.pepperoni}xPepperoni
+        </li>`)
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.toppings.mushrooms}xMushrooms
+        </li>`)
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.toppings.bacon}xBacon
+        </li>`)
+        $("#receipt").append(`<li class="list-group-item">
+        ${order.toppings.olives}xOlives
+        </li>`)
+
+
+        total += order.calcCost();
     }
+
+    // $("#receipt").append(`<li class="list-group-item">
+    // Total: $ ${total}
+    // </li>`);
 })
 
 
 class pizza{
    
-    constructor(pepperoni, mushrooms){
-        this.pepperoni = pepperoni;
-        this.mushrooms = mushrooms;
+    constructor(toppings){
+        this.toppings = toppings;
     }
     
-    incrementPep(){
-        pepperoni++;
-    }
-    incrementMush(){
-        mushrooms++;
-    }
+    // incrementPep(){
+    //     pepperoni++;
+    // }
+    // incrementMush(){
+    //     mushrooms++;
+    // }
 
     calcCost(){
-        return 7 + (this.toppings.pepperoni*0.7) + (this.toppings.mushrooms * 0.5);
+        var price = 7;
+        
     }
 }
