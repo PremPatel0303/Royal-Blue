@@ -13,12 +13,16 @@ var toppings2 = {
 }
 function creatPiz(){
     cart.push(new pizza(toppings2));
+    sessionStorage.setItem('shop', JSON.stringify(cart))
+    reset();
 }
 
 
 
-$("#create-pizza").click(function() {
+$("#add-to-cart").click(function() {
+   
     cart.push(new pizza(toppings2));
+    sessionStorage.setItem('shop', JSON.stringify(cart))
     reset();
     
 })
@@ -86,6 +90,27 @@ $("#checkout").click(function(){
 })
 
 
+$(document).ready(() => {
+
+if($('#cart').length){
+    console.log("hello")
+    var data = JSON.parse(sessionStorage.getItem('shop'));
+    var orderNo = 1;
+    for(order of data){
+        console.log("true")
+
+        
+        $("#cart").append(`<p>Order #${orderNo++}</p>`)
+        $("#cart").append(`<p>${order.toppings.pepperoni} pepperoni</p>`)
+        $("#cart").append(`<p>${order.toppings.mushrooms} mushrooms</p>`)
+        $("#cart").append(`<p>${order.toppings.bacon} bacon</p>`)
+        $("#cart").append(`<p>${order.toppings.olives} olives</p>`)
+    }
+}
+
+}) 
+
+
 class pizza{
    
     constructor(toppings){
@@ -104,3 +129,4 @@ class pizza{
         
     }
 }
+
