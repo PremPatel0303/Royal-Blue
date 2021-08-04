@@ -96,6 +96,8 @@ if($('#cart').length){
     console.log("hello")
     var data = JSON.parse(sessionStorage.getItem('shop'));
     var orderNo = 1;
+    let grandTotal = 0.00
+    
     for(order of data){
 
         // $("#cart").append(`<p>Order #${orderNo++}</p>`)
@@ -103,6 +105,7 @@ if($('#cart').length){
         // $("#cart").append(`<p>${order.toppings.mushrooms} mushrooms</p>`)
         // $("#cart").append(`<p>${order.toppings.bacon} bacon</p>`)
         // $("#cart").append(`<p>${order.toppings.olives} olives</p>`)
+        grandTotal += (new pizza(order.toppings)).calcCost();
         $("#cart").append(`
         <div class="card receipt" style="width: 18rem;">
             <div class="card-header">
@@ -113,12 +116,19 @@ if($('#cart').length){
             <li class="list-group-item">${order.toppings.mushrooms} mushrooms</li>
             <li class="list-group-item">${order.toppings.bacon} bacon</li>
             <li class="list-group-item">${order.toppings.olives} olives</li>
+            <li class="list-group-item">Subtotal: $${(new pizza(order.toppings)).calcCost()} </li>
             
             </ul>
       </div>`)
 
         
     }
+
+    $("#cart").append(`
+    <div class="card receipt" style="width: 18rem;">
+    <div class="card-header">
+           Total: $${grandTotal}
+    </div>`)
 }
 
 }) 
@@ -138,7 +148,7 @@ class pizza{
     // }
 
     calcCost(){
-        var price = 7;
+            return 9.99+(this.toppings.mushrooms*0.25)+(this.toppings.pepperoni*0.75)+(this.toppings.bacon*1.00)+(this.toppings.olives*0.25)
         
     }
 }
