@@ -12,4 +12,9 @@
 
 .add-to-cart {
     background-color: #DB0000 !important;
+    position: relative;
+}
+
+#reset-button {
+    padding-left: 10px;
 }
