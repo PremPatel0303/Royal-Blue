@@ -24,9 +24,8 @@
     font-size: 50px;
 }
 
-#containerLogo{
-    position: absolute;
-    bottom: 5px;
+.slogan{
+    padding: 75px;
 }
 body{
     background-color: #F7EDE2;
