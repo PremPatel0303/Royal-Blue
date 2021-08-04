@@ -97,9 +97,7 @@ if($('#cart').length){
     var data = JSON.parse(sessionStorage.getItem('shop'));
     var orderNo = 1;
     for(order of data){
-        console.log("true")
 
-        
         $("#cart").append(`<p>Order #${orderNo++}</p>`)
         $("#cart").append(`<p>${order.toppings.pepperoni} pepperoni</p>`)
         $("#cart").append(`<p>${order.toppings.mushrooms} mushrooms</p>`)
