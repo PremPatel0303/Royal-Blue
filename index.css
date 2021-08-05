@@ -35,3 +35,8 @@ body{
     margin: auto;
     margin-bottom: 15px;
 }
+#pizzaIntro{
+    font-size: 70px;
+    text-align: center;
+    color: #3C1518;
+}
