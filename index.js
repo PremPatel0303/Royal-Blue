@@ -101,44 +101,48 @@ $("#reset-button").click(function(){
 
 $(document).ready(() => {
 
-if($('#cart').length){
-    console.log("hello")
-    var data = JSON.parse(sessionStorage.getItem('shop'));
-    var orderNo = 1;
-    let grandTotal = 0.00
+    if($("#add-to-cart").length){
+        cart = JSON.parse(sessionStorage.getItem('shop'))
+    }
     
-    for(order of data){
+    if($('#cart').length){
+        var data = JSON.parse(sessionStorage.getItem('shop'));
+        console.log("hello")
+        var orderNo = 1;
+        let grandTotal = 0.00
+    
+        for(order of data){
 
-        // $("#cart").append(`<p>Order #${orderNo++}</p>`)
-        // $("#cart").append(`<p>${order.toppings.pepperoni} pepperoni</p>`)
-        // $("#cart").append(`<p>${order.toppings.mushrooms} mushrooms</p>`)
-        // $("#cart").append(`<p>${order.toppings.bacon} bacon</p>`)
-        // $("#cart").append(`<p>${order.toppings.olives} olives</p>`)
-        grandTotal += (new pizza(order.toppings)).calcCost();
+            // $("#cart").append(`<p>Order #${orderNo++}</p>`)
+            // $("#cart").append(`<p>${order.toppings.pepperoni} pepperoni</p>`)
+            // $("#cart").append(`<p>${order.toppings.mushrooms} mushrooms</p>`)
+            // $("#cart").append(`<p>${order.toppings.bacon} bacon</p>`)
+            // $("#cart").append(`<p>${order.toppings.olives} olives</p>`)
+            grandTotal += (new pizza(order.toppings)).calcCost();
+            $("#cart").append(`
+            <div class="card receipt" style="width: 18rem;">
+                <div class="card-header">
+                        Pizza #${orderNo++}
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">${order.toppings.pepperoni} pepperoni</li>
+                <li class="list-group-item">${order.toppings.mushrooms} mushrooms</li>
+                <li class="list-group-item">${order.toppings.bacon} bacon</li>
+                <li class="list-group-item">${order.toppings.olives} olives</li>
+                <li class="list-group-item">Subtotal: $${(new pizza(order.toppings)).calcCost()} </li>
+                
+                </ul>
+        </div>`)
+
+            
+        }
+
         $("#cart").append(`
         <div class="card receipt" style="width: 18rem;">
-            <div class="card-header">
-                    Pizza #${orderNo++}
-            </div>
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">${order.toppings.pepperoni} pepperoni</li>
-            <li class="list-group-item">${order.toppings.mushrooms} mushrooms</li>
-            <li class="list-group-item">${order.toppings.bacon} bacon</li>
-            <li class="list-group-item">${order.toppings.olives} olives</li>
-            <li class="list-group-item">Subtotal: $${(new pizza(order.toppings)).calcCost()} </li>
-            
-            </ul>
-      </div>`)
-
-        
+        <div class="card-header">
+            Total: $${grandTotal}
+        </div>`)
     }
-
-    $("#cart").append(`
-    <div class="card receipt" style="width: 18rem;">
-    <div class="card-header">
-           Total: $${grandTotal}
-    </div>`)
-}
 
 }) 
 
