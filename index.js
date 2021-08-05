@@ -28,6 +28,11 @@ $("#add-to-cart").click(function() {
 })
 
 reset = () => {
+
+    $("#mushroom").css("opacity", 0)
+    $("#pepperoni").css("opacity", 0)
+    $("#Bacon").css("opacity", 0)
+    $("#Olives").css("opacity", 0)
    toppings2 = {
        mushrooms: 0,
        pepperoni: 0,
@@ -87,6 +92,10 @@ $("#checkout").click(function(){
     // $("#receipt").append(`<li class="list-group-item">
     // Total: $ ${total}
     // </li>`);
+})
+
+$("#reset-button").click(function(){
+    sessionStorage.removeItem('shop')
 })
 
 
