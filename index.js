@@ -1,11 +1,11 @@
-var cart = [];
+var cart = []; //how we store multiple pizza
 
 var mush = 0;
 var pep = 0;
 
 
 
-var toppings2 = {
+var toppings2 = { //toppings template
     mushrooms: 0,
     pepperoni: 0,
     bacon: 0,
@@ -19,15 +19,15 @@ function creatPiz(){
 
 
 
-$("#add-to-cart").click(function() {
+$("#add-to-cart").click(function() { 
    
-    cart.push(new pizza(toppings2));
-    sessionStorage.setItem('shop', JSON.stringify(cart))
-    reset();
+    cart.push(new pizza(toppings2)); //make new pizza object
+    sessionStorage.setItem('shop', JSON.stringify(cart)) //convert it to session storage so the data doesnt get wiped
+    reset(); //reset toppings so we can make new pizza :)
     
 })
 
-reset = () => {
+reset = () => { //reset everything
 
     $("#mushroom").css("opacity", 0)
     $("#pepperoni").css("opacity", 0)
@@ -41,7 +41,7 @@ reset = () => {
    }
 }
 
-$(".btn").click(function() {
+$(".btn").click(function() { //topping button event listener
 
     if(this.textContent == "Mushrooms"){
         toppings2.mushrooms++;
@@ -69,7 +69,7 @@ $(".btn").click(function() {
 })
 
 
-$("#checkout").click(function(){
+$("#checkout").click(function(){ //ignore
     var total = 0;
     for(order of cart){
         $("#receipt").append(`<li class="list-group-item">
@@ -94,24 +94,24 @@ $("#checkout").click(function(){
     // </li>`);
 })
 
-$("#reset-button").click(function(){
-    sessionStorage.removeItem('shop')
+$("#reset-button").click(function(){ //if you don't like your cart you can reset
+    sessionStorage.removeItem('shop') //removes previous cart from storage
 })
 
 
 $(document).ready(() => {
 
-    if($("#add-to-cart").length){
-        cart = JSON.parse(sessionStorage.getItem('shop'))
+    if($("#add-to-cart").length){ //check if page is pizza maker page
+        cart = JSON.parse(sessionStorage.getItem('shop')) //put storage back into cart so it doesn't reset
     }
     
-    if($('#cart').length){
-        var data = JSON.parse(sessionStorage.getItem('shop'));
-        console.log("hello")
-        var orderNo = 1;
-        let grandTotal = 0.00
+    if($('#cart').length){ //check if page is shopping cart page
+        var data = JSON.parse(sessionStorage.getItem('shop')); //turn storage into javascript object
+        console.log("hello") //test 
+        var orderNo = 1; //count orders
+        let grandTotal = 0.00 //calc total cost
     
-        for(order of data){
+        for(order of data){ //go through each pizza object
 
             // $("#cart").append(`<p>Order #${orderNo++}</p>`)
             // $("#cart").append(`<p>${order.toppings.pepperoni} pepperoni</p>`)
@@ -119,7 +119,8 @@ $(document).ready(() => {
             // $("#cart").append(`<p>${order.toppings.bacon} bacon</p>`)
             // $("#cart").append(`<p>${order.toppings.olives} olives</p>`)
             grandTotal += (new pizza(order.toppings)).calcCost();
-            $("#cart").append(`
+            //receipt template for each pizza object
+            $("#cart").append(` 
             <div class="card receipt" style="width: 18rem;">
                 <div class="card-header">
                         Pizza #${orderNo++}
@@ -136,7 +137,7 @@ $(document).ready(() => {
 
             
         }
-
+        //add grand total to bottom
         $("#cart").append(`
         <div class="card receipt" style="width: 18rem;">
         <div class="card-header">
@@ -147,9 +148,9 @@ $(document).ready(() => {
 }) 
 
 
-class pizza{
+class pizza{ //pizza class so it is easy to make multiple pizza object copies
    
-    constructor(toppings){
+    constructor(toppings){ //takes in toppings object
         this.toppings = toppings;
     }
     
@@ -160,7 +161,7 @@ class pizza{
     //     mushrooms++;
     // }
 
-    calcCost(){
+    calcCost(){ //calculates the cost of the pizza
             return 9.99+(this.toppings.mushrooms*0.25)+(this.toppings.pepperoni*0.75)+(this.toppings.bacon*1.00)+(this.toppings.olives*0.25)
         
     }
