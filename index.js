@@ -22,7 +22,7 @@ function creatPiz(){
 $("#add-to-cart").click(function() { 
    
     cart.push(new pizza(toppings2)); //make new pizza object
-    sessionStorage.setItem('shop', JSON.stringify(cart)) //convert it to session storage so the data doesnt get wiped
+    sessionStorage.setItem('shop', JSON.stringify(cart)); //convert it to session storage so the data doesnt get wiped
     reset(); //reset toppings so we can make new pizza :)
     
 })
@@ -102,7 +102,10 @@ $("#reset-button").click(function(){ //if you don't like your cart you can reset
 $(document).ready(() => {
 
     if($("#add-to-cart").length){ //check if page is pizza maker page
-        cart = JSON.parse(sessionStorage.getItem('shop')) //put storage back into cart so it doesn't reset
+        if(sessionStorage.getItem('shop') != null){
+            cart = JSON.parse(sessionStorage.getItem('shop')); //put storage back into cart so it doesn't reset
+            
+        }
     }
     
     if($('#cart').length){ //check if page is shopping cart page
